@@ -185,8 +185,7 @@ Don't use this as a key-value store, or get frustrated when it's
 not that.
 
 If your problem is DAG-shaped, this is a DAG-shaped tool.  It's a
-good DAG, it's not ay different kind of thing.  So don't use it
-for any other kind of thing.
+good DAG, it's not a caravan.
 
 ## That is the joke.
 
