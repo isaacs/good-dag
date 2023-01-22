@@ -1,7 +1,6 @@
 import t from 'tap'
-import {format} from 'util'
 
-import {GoodDAG, DAGEntry} from '../'
+import { DAGEntry, GoodDAG } from '../'
 
 t.type(DAGEntry, 'function', 'DAGEntry class exported')
 
@@ -23,8 +22,10 @@ t.test('basic usage', t => {
   const root = new GoodDAG<number>(0, 5)
   t.type(root.data.parent, Uint8Array)
   t.equal(root.isRoot(), true)
+  t.equal(root.parent(), undefined)
   t.equal(root.data.getParent(root.index), undefined)
   t.equal(root.root(), root)
+  t.equal(root.value(), 0)
   const one = root.append(1)
   t.equal(one.root(), root)
   t.equal(one.isRoot(), false)
@@ -49,7 +50,6 @@ t.test('basic usage', t => {
   t.equal(otherSix.value(), 6)
   t.equal(otherSix.parent(), tre)
   t.equal(six.parent(), tre)
-  t.matchSnapshot(format(six), 'format dag entry')
   root.append(8)
   root.append(9)
   const ten = root.append(10)
@@ -57,7 +57,11 @@ t.test('basic usage', t => {
   t.equal(ten.data, root.data.nextBlock.nextBlock, 'ten on third block')
   const lvn = six.append(11)
   t.equal(lvn.data.dags.length, 3, 'third block has refs to both others')
-  t.equal(six.data.dags.length, 2, 'second block only refs first and itself')
+  t.equal(
+    six.data.dags.length,
+    2,
+    'second block only refs first and itself'
+  )
   t.end()
 })
 

@@ -6,20 +6,17 @@
  */
 'use strict'
 exports[`test/index.ts TAP basic usage > format dag entry 1`] = `
-GoodDAG {
-  'value()': 6,
-  'parent()': GoodDAG {
-    'value()': 3,
-    'parent()': GoodDAG {
-      'value()': 1,
-      'parent()': GoodDAG { 'value()': 0, index: 0, data: DAGData 5 { block: 0, nextFree: 5 } },
-      index: 1,
-      data: DAGData 5 { block: 0, nextFree: 5 }
-    },
-    index: 3,
-    data: DAGData 5 { block: 0, nextFree: 5 }
+<ref *2> DAGEntry {
+  data: <ref *1> DAGData {
+    dags: [ [Circular *1], [DAGData] ],
+    entries: [ [DAGEntry], [Circular *2], [DAGEntry] ],
+    values: [ 5, 6, 6 ],
+    parent: Uint8Array(5) [ 3, 3, 3, 0, 0 ],
+    parentDAG: Uint8Array(5) [ 1, 1, 1, 0, 0 ],
+    blockSize: 5,
+    nextFree: 3,
+    nextBlock: undefined
   },
-  index: 1,
-  data: DAGData 5 { block: 1, nextFree: 3 }
+  index: 1
 }
 `

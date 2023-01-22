@@ -3,10 +3,6 @@
 // and the link value is a reference to that other
 // object and the index within it.
 
-const inspectSymbol = Symbol.for('nodejs.util.inspect.custom')
-
-import { format } from 'util'
-
 // exported class is a DAGEntry that creates its data storage
 // and is the root entry.
 export class GoodDAG<T = string> implements DAGEntry<T> {
@@ -16,10 +12,6 @@ export class GoodDAG<T = string> implements DAGEntry<T> {
   constructor(rootValue: T, blockSize: number = max16) {
     this.data = new DAGData<T>(blockSize, rootValue)
     this.data.entries[0] = this
-  }
-
-  [inspectSymbol](): string {
-    return formatEntry(this)
   }
 
   /**
@@ -54,7 +46,7 @@ export class GoodDAG<T = string> implements DAGEntry<T> {
   /**
    * get the count of items stored in the DAG
    */
-  size():number {
+  size(): number {
     return this.data.size()
   }
 
@@ -73,10 +65,6 @@ export class DAGEntry<T> {
   constructor(dag: DAGData<T>, index: number) {
     this.data = dag
     this.index = index
-  }
-
-  [inspectSymbol](): string {
-    return formatEntry(this)
   }
 
   /**
@@ -111,7 +99,7 @@ export class DAGEntry<T> {
   /**
    * get the count of items stored in the DAG
    */
-  size():number {
+  size(): number {
     return this.data.rootData().size()
   }
 
@@ -125,23 +113,10 @@ export class DAGEntry<T> {
 
 // double bitwise negation floors and casts to overflow 4-byte signed
 const isLongInt = (i: number) => {
-  const n:number = ~~i
+  const n: number = ~~i
   return n === i || (n <= 0 && max32 + n === i)
 }
 const isPosLongInt = (i: number) => i && isLongInt(i)
-
-const formatEntry = (entry: DAGEntry<any>) => {
-  const p = entry.parent()
-  return (
-    `GoodDAG ` +
-    format({
-      'value()': entry.value(),
-      ...(p ? { 'parent()': entry.parent() } : {}),
-      index: entry.index,
-      data: entry.data,
-    })
-  )
-}
 
 const max32 = Math.pow(2, 32)
 const max16 = Math.pow(2, 16)
@@ -155,9 +130,6 @@ const getUintArray = (max: number): UintArrayClass => {
 }
 type UintArray = Uint8Array | Uint16Array | Uint32Array
 type UintArrayClass = { new (n: number): UintArray }
-
-const dataInspectMap: Map<DAGData<any>, { [k: string]: any }> = new Map()
-let blockIndex = 0
 
 class DAGData<T> {
   // these can grow up to blockSize
@@ -204,17 +176,8 @@ class DAGData<T> {
     }
   }
 
-  [inspectSymbol](): string {
-    const i = dataInspectMap.get(this) || {
-      block: blockIndex++,
-    }
-    i.nextFree = this.nextFree
-    dataInspectMap.set(this, i)
-    return `DAGData ${this.blockSize} ${format(i)}`
-  }
-
   rootData(): DAGData<T> {
-    let d:DAGData<T> = this
+    let d: DAGData<T> = this
     while (d.parentDAG[0] !== 0) {
       d = d.dags[d.parentDAG[0]]
     }
