@@ -168,7 +168,8 @@ DAG in your use case:
 - more than 50,000 items, especially if the DAG object isn't likely to
   stick around for a long time, or if you just don't want to blow
   more than 128kb per block: set `blockSize` to `65536`. Each
-  block will allocate 128kb.
+  block will allocate 128kb.  (Set it smaller than that if 128kb
+  is more than you want to spend.)
 - way more than 10m items (like billions), _and_ the DAG object
   is going to stick around for a long time (like a long-lived
   module-local variable, for example), so you won't hit the
