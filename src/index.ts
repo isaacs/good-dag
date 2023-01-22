@@ -66,7 +66,7 @@ export class GoodDAG<T = string> implements DAGEntry<T> {
   }
 }
 
-class DAGEntry<T> {
+export class DAGEntry<T> {
   readonly data: DAGData<T>
   readonly index: number
 

@@ -119,6 +119,21 @@ to the children from the parent, only the other direction.
 
 (It's very directed!)
 
+## Class: `DAGEntry`
+
+This is the class used for every entry _other than_ the root.
+
+It is not intended to be instantiated directly, but it is
+exported for the benefit of class-extension use cases,
+`instanceof` type checking, and so on.
+
+`DAGEntry` instances have all the same methods and properties as
+`GoodDAG`.  The only difference is that they do not create an
+underlying data store on creation, and instead use their
+parent's.
+
+Instantiate `DAGEntry` classes by calling `dag.append(data)`.
+
 ## Performance, Memory, and `blockSize` Tuning
 
 Tuning the `blockSize` requires some consideration. The default

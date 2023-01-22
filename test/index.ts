@@ -1,7 +1,9 @@
 import t from 'tap'
 import {format} from 'util'
 
-import {GoodDAG} from '../'
+import {GoodDAG, DAGEntry} from '../'
+
+t.type(DAGEntry, 'function', 'DAGEntry class exported')
 
 t.test('typechecks', t => {
   //@ts-expect-error
