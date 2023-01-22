@@ -163,6 +163,7 @@ class DAGData<T> {
     this.dags = [this]
     this.parent = new Arr(blockSize)
     this.parentDAG = new Arr(blockSize)
+
     this.values = [rootValue]
 
     const rootEntry = new DAGEntry<T>(this, 0)
