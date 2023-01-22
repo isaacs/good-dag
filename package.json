@@ -1,6 +1,6 @@
 {
   "name": "good-dag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "fast expandable directed acyclic graph using linked lists",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://blog.izs.me)",
   "main": "./dist/cjs/index.js",
