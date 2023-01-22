@@ -52,7 +52,7 @@
 //
 // When in doubt, just set the block size to Math.pow(2, 16), which allocs
 // super fast, and is reasonably fast up to a million entries or so, and then
-// the blocks are only 32kb each.  If you are fairly confident that you'll
+// the blocks are only 64kb each.  If you are fairly confident that you'll
 // have a much smaller number of items, like 1-1000, set the blockSize to
 // 256, so each block only requires 256 bytes and allocates much faster.
 
