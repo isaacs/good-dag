@@ -19,3 +19,4 @@
 !/.gitattributes
 !/tsconfig*.json
 !/*.gif
+!/typedoc.json
